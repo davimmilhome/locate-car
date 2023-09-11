@@ -1,5 +1,8 @@
 package locate.car.ADA;
 
+import locate.car.ADA.models.Aluguel.Movimentacao;
+import locate.car.ADA.models.Aluguel.TabelaMovimentacoes;
+import locate.car.ADA.models.Aluguel.TipoMovimentacao;
 import locate.car.ADA.models.Pessoas.BaseClientes;
 import locate.car.ADA.models.Pessoas.Pessoa;
 import locate.car.ADA.models.Pessoas.PessoaFisica;
@@ -7,11 +10,14 @@ import locate.car.ADA.models.Pessoas.PessoaJuridica;
 import locate.car.ADA.models.Veiculos.Carro;
 import locate.car.ADA.models.Veiculos.*;
 
+import java.awt.event.ItemListener;
+
 public class Main {
     public static void main(String[] args) {
 
        Frota frota = Frota.getInstancia();
        BaseClientes baseClientes = BaseClientes.getInstancia();
+       TabelaMovimentacoes tabelaMovimentacoes = TabelaMovimentacoes.getInstancia();
 
        System.out.println("Cadastrando Veículo");
        Carro carro = new Carro("ABCE", "Volkswagen", "Preto", "1972", "Bege", TipoCarro.MEDIO);
@@ -46,10 +52,39 @@ public class Main {
 
        System.out.println("Cadastrando Placa Repetida");
        try {
+          PessoaFisica pessoaRepetida = new PessoaFisica("Av. Alberto Magno 457", "85996445175", "06916326315", "Jonathan Silva", "15/10/1999");
+          PessoaJuridica pessoaRepetida2 = new PessoaJuridica("Rua do Galeão 904", "85993135822", "07526557000100", "Ambev S/A", "Ambev");
+       } catch (IllegalArgumentException e) {
+         System.out.println("Erro ao criar cliente: " + e.getMessage());
+      }
+       System.out.println();
+
+       System.out.println("Cadastrando Pessoa Repetida");
+       try {
           Carro carro15 = new Carro("ABCE", "Volkswagen", "Preto", "1972", "Bege", TipoCarro.MEDIO);
        } catch (IllegalArgumentException e) {
-         System.out.println("Erro ao criar carro: " + e.getMessage());
-      }
+          System.out.println("Erro ao criar carro: " + e.getMessage());
+       }
+       System.out.println();
+
+       System.out.println("Cadastrando Movimentacoes (retirada - aluguel)");
+       Movimentacao movimentacao1 = new Movimentacao(TipoMovimentacao.RETIRADA, "LOJA1", "15/10/2007:14:15", pessoa1, carro2);
+       System.out.println(tabelaMovimentacoes.toString());
+       System.out.println();
+
+
+        System.out.println("Tentando retirar um veiculo já alugado");
+        try {
+            Movimentacao movimentacaoTeste = new Movimentacao(TipoMovimentacao.RETIRADA, "LOJA1", "15/10/2007:14:15", pessoa1, carro2);
+        } catch(IllegalArgumentException e) {
+            System.out.println("Erro ao criar movimetacao: " + e.getMessage());
+        }
+
+        System.out.println("Cadastrando Movimentacoes (devolucao)");
+        Movimentacao movimentacao2 = new Movimentacao(TipoMovimentacao.DEVOLUCAO, "LOJA1", "15/10/2007:14:15", pessoa1, carro2);
+        System.out.println(tabelaMovimentacoes.toString());
+        System.out.println();
+
 
 
 

@@ -30,11 +30,13 @@ public class PessoaFisica extends Pessoa{
     @Override
     public String toString() {
         return "PessoaFisica{" +
-                "nome='" + nome + '\'' +
+                "idPessoa='" + idPessoa + '\'' +
+                ", cpf='" + identificador + '\'' +
+                ", nome='" + nome + '\'' +
                 ", dataNascimento='" + dataNascimento + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", contato='" + contato + '\'' +
-                ", cpf='" + identificador + '\'' +
+
                 '}';
     }
 }

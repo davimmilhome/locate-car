@@ -1,12 +1,15 @@
 package locate.car.ADA.models.Pessoas;
 import locate.car.ADA.models.BuscaPeloNome;
+import locate.car.ADA.models.GerarID;
 import locate.car.ADA.models.Veiculos.Frota;
 import locate.car.ADA.models.Veiculos.Veiculo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseClientes implements BuscaPeloNome<Pessoa> {
+public class BaseClientes implements BuscaPeloNome<Pessoa>{
+
+    String idCliente;
 
     private static BaseClientes instancia = null;
     private List<Pessoa> clientes;
@@ -56,6 +59,5 @@ public class BaseClientes implements BuscaPeloNome<Pessoa> {
 
         return sb.toString();
     }
-
 
 }
